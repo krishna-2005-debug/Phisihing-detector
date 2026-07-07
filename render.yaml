@@ -1,21 +1,18 @@
 # render.yaml — Render Blueprint
-# Deploys the FastAPI backend (Web Service) and React frontend (Static Site)
+# Deploys the FastAPI backend (Docker Web Service) and React frontend (Static Site)
 # Docs: https://render.com/docs/blueprint-spec
 
 services:
-  # ── Backend: FastAPI + ML classifier ──────────────────────────────────────
+  # ── Backend: FastAPI + ML classifier (Docker) ─────────────────────────────
   - type: web
     name: shieldai-api
-    runtime: python
+    runtime: docker
     region: oregon
     plan: free
-    rootDir: backend
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    rootDir: backend          # Docker build context = ./backend/
+    dockerfilePath: ./Dockerfile  # relative to rootDir → backend/Dockerfile
     healthCheckPath: /health
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: ALLOWED_ORIGINS
         value: https://shieldai-frontend.onrender.com  # update after first deploy
 
