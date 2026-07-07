@@ -29,6 +29,8 @@ const icons = {
   list:    <><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></>,
 };
 
+const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8000";
+
 function App() {
   const [url, setUrl]                 = useState("");
   const [threshold, setThreshold]     = useState(0.5);
@@ -52,7 +54,7 @@ function App() {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:8000/docs", { timeout: 1500 })
+    axios.get(`${API_BASE}/health`, { timeout: 3000 })
       .then(() => setBackendOk(true))
       .catch(() => { setBackendOk(false); setDemoMode(true); });
   }, []);
@@ -108,7 +110,7 @@ function App() {
     let data;
     try {
       if (demoMode) throw new Error("demo");
-      const res = await axios.post("http://localhost:8000/predict", {
+      const res = await axios.post(`${API_BASE}/predict`, {
         url: target, include_content: deepMode, threshold: Number(threshold)
       });
       data = res.data;

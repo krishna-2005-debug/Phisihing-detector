@@ -17,7 +17,7 @@ services:
       - key: PYTHON_VERSION
         value: "3.11.0"
       - key: ALLOWED_ORIGINS
-        value: https://shieldai-frontend.onrender.com
+        value: "https://shieldai-frontend.onrender.com,https://shieldai-frontend.onrender.com/"
 
   # ── Frontend: React Static Site ───────────────────────────────────────────
   - type: web

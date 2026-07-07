@@ -9,15 +9,15 @@ import numpy as np
 
 app = FastAPI(title="ShieldAI Phishing Detector", version="1.2.0")
 
-# Read allowed origins from environment (comma-separated).
-# Defaults to * so local development works without any .env setup.
-_raw_origins = os.getenv("ALLOWED_ORIGINS", "*")
-ALLOWED_ORIGINS = [o.strip() for o in _raw_origins.split(",")]
+# Allow all origins for this public tool (no auth/cookies needed).
+# On Render the frontend URL can vary; wildcard removes CORS as a failure point.
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+ALLOWED_ORIGINS = [o.strip() for o in ALLOWED_ORIGINS]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
-    allow_credentials=True,
+    allow_origins=["*"],          # wildcard — no credentials sent
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
