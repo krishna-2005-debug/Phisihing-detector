@@ -16,6 +16,7 @@ const icons = {
   globe:   <><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>,
   search:  <><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></>,
   check:   "M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4 12 14.01l-3-3",
+  close:   <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
   x:       <><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></>,
   warn:    <><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></>,
   lock:    <><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
@@ -232,9 +233,16 @@ function App() {
 
           {/* Input card */}
           <div className="input-card">
+            <div className="input-label">
+              <Icon d={icons.globe} size={12} />
+              Enter a URL to scan
+            </div>
             <div className="input-row">
               <div className="url-wrap">
-                <span className="url-icon"><Icon d={icons.globe} size={14} /></span>
+                <span className="url-prefix">
+                  <Icon d={icons.globe} size={12} />
+                  URL
+                </span>
                 <input className="url-input"
                   type="text"
                   placeholder="https://example.com/path"
@@ -243,11 +251,21 @@ function App() {
                   onKeyDown={e => e.key === "Enter" && scan()}
                   disabled={isLoading}
                 />
+                {url && (
+                  <button
+                    className="url-clear"
+                    onClick={() => setUrl("")}
+                    title="Clear"
+                    tabIndex={-1}
+                  >
+                    <Icon d={icons.close} size={13} />
+                  </button>
+                )}
               </div>
               <button className="scan-btn" onClick={scan} disabled={isLoading}>
                 {isLoading
                   ? <><div className="spin" /> Scanning</>
-                  : <><Icon d={icons.search} size={14} /> Scan</>
+                  : <><Icon d={icons.search} size={14} /> Scan URL</>
                 }
               </button>
             </div>
