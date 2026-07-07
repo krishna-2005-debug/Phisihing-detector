@@ -1,0 +1,38 @@
+# render.yaml — Render Blueprint
+# Deploys the FastAPI backend (Web Service) and React frontend (Static Site)
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ── Backend: FastAPI + ML classifier ──────────────────────────────────────
+  - type: web
+    name: shieldai-api
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: ALLOWED_ORIGINS
+        value: https://shieldai-frontend.onrender.com  # update after first deploy
+
+  # ── Frontend: React Static Site ───────────────────────────────────────────
+  - type: web
+    name: shieldai-frontend
+    runtime: static
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://shieldai-api.onrender.com   # update to match your API service URL
+    routes:
+      # Send all routes to index.html for client-side routing
+      - type: rewrite
+        source: /*
+        destination: /index.html

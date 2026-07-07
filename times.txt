@@ -1,0 +1,132 @@
+🧑‍💻 1. Tell me about yourself
+
+👉 Structure:
+
+Education
+Skills
+Projects
+
+Answer:
+“I am a final-year AI & Data Science student with strong skills in Python, SQL, and web development. I have built projects like an e-commerce platform using Django and React, and an AI-based phishing detection system. I am interested in software development and solving real-world problems.”
+
+💡 2. Why should we hire you?
+
+Answer:
+“I have practical project experience, strong fundamentals, and I’m a quick learner. I can adapt quickly and contribute effectively to the team.”
+
+🧠 3. What is OOP?
+
+Answer:
+“OOP is a programming paradigm based on objects and classes. It includes concepts like encapsulation, inheritance, polymorphism, and abstraction.”
+
+🔁 4. What is inheritance?
+
+Answer:
+“It allows one class to reuse properties and methods of another class.”
+
+🔄 5. What is polymorphism?
+
+Answer:
+“Same function name behaves differently based on context.”
+
+🗄️ 6. What is a primary key?
+
+Answer:
+“A unique identifier for each record in a table. It cannot be NULL or duplicate.”
+
+🔗 7. What is JOIN?
+
+Answer:
+“JOIN is used to combine data from multiple tables based on a related column.”
+
+🌐 8. What is REST API?
+
+Answer:
+“A way for systems to communicate using HTTP methods like GET, POST, PUT, DELETE.”
+
+⚖️ 9. Difference: SQL vs NoSQL
+
+( MySQL vs MongoDB )
+
+Answer:
+“SQL uses structured tables with fixed schema, while NoSQL uses flexible document-based storage.”
+
+🧮 10. What is an array?
+
+Answer:
+“A collection of elements stored in contiguous memory locations.”
+
+🔍 11. What is time complexity?
+
+Answer:
+“It measures how the execution time of an algorithm grows with input size.”
+
+⚡ 12. What is O(1)?
+
+Answer:
+“Constant time — execution does not depend on input size.”
+
+🔁 13. What is recursion?
+
+Answer:
+“A function calling itself to solve smaller subproblems.”
+
+🔢 14. Explain Two Sum approach
+
+Answer:
+“Use a hash map to store visited numbers and check if the complement exists.”
+
+🔤 15. What is a palindrome?
+
+Answer:
+“A string that reads the same forward and backward.”
+
+🧾 16. What is normalization?
+
+Answer:
+“Process of organizing data to reduce redundancy.”
+
+🔄 17. What is indexing in DB?
+
+Answer:
+“It improves query performance by creating a data structure for fast lookup.”
+
+🐍 18. Why Python?
+
+Answer:
+“It is easy to learn, has simple syntax, and supports multiple domains like web and AI.”
+
+☕ 19. Why Java?
+
+Answer:
+“It is platform-independent, secure, and widely used in enterprise applications.”
+
+🧮 20. What is NumPy?
+
+Answer:
+“A library for numerical operations using arrays, faster than Python lists.”
+
+📊 21. What is pandas?
+
+Answer:
+“A library used for data analysis and handling structured data like tables.”
+
+📈 22. What is Matplotlib?
+
+Answer:
+“A library used for data visualization like graphs and charts.”
+
+🧹 23. What is data cleaning?
+
+Answer:
+“Process of handling missing values, removing duplicates, and correcting data.”
+
+🧠 24. Explain your project (VERY IMPORTANT)
+
+👉 Example (your e-commerce project):
+“I built an e-commerce web application using Django and React with features like product listing, cart, order management, and payment integration. I handled backend APIs and database design.”
+
+⚠️ 25. What are your weaknesses?
+
+Answer:
+“I focus too much on details sometimes, but I am improving by managing time better.”
