@@ -40,6 +40,7 @@ function App() {
   const [isLoading, setIsLoading]     = useState(false);
   const [loadingStep, setLoadingStep] = useState("");
   const [backendOk, setBackendOk]     = useState(true);
+  const [urlError, setUrlError]       = useState("");
 
   const defaultHistory = [
     { url: "http://secure-login-bank-verification.com/login.html", label: "PHISH", prob: 0.88, time: "10:24 AM",
@@ -89,8 +90,11 @@ function App() {
   };
 
   const scan = async () => {
-    if (!url.trim()) return;
-    let target = url.trim();
+    const raw = url.trim();
+    if (!raw) { setUrlError("Please enter a URL."); return; }
+    setUrlError("");
+
+    let target = raw;
     if (!/^https?:\/\//i.test(target)) target = "http://" + target;
 
     setIsLoading(true);
@@ -114,7 +118,14 @@ function App() {
         url: target, include_content: deepMode, threshold: Number(threshold)
       });
       data = res.data;
-    } catch {
+    } catch (err) {
+      // 422 = validation error from backend — surface to user, don't fall back
+      if (err?.response?.status === 422) {
+        const detail = err.response.data?.detail || "Invalid URL format.";
+        setUrlError(detail);
+        setIsLoading(false);
+        return;
+      }
       data = localScan(target);
       setBackendOk(false);
     }
@@ -249,9 +260,10 @@ function App() {
                   type="text"
                   placeholder="https://example.com/path"
                   value={url}
-                  onChange={e => setUrl(e.target.value)}
+                  onChange={e => { setUrl(e.target.value); setUrlError(""); }}
                   onKeyDown={e => e.key === "Enter" && scan()}
                   disabled={isLoading}
+                  style={urlError ? { borderColor: "var(--red, #dc2626)" } : {}}
                 />
                 {url && (
                   <button
@@ -272,6 +284,13 @@ function App() {
               </button>
             </div>
           </div>
+          {/* URL Error */}
+          {urlError && (
+            <div className="url-error-banner">
+              <Icon d={icons.warn} size={14} style={{ flexShrink: 0 }} />
+              <span>{urlError}</span>
+            </div>
+          )}
 
           {/* Loading */}
           {isLoading && (
